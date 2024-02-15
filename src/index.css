@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html{
+  scroll-behavior: smooth;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  color: white;
+  background-color: black;
+  font-family:'Times New Roman', Times, sans-serif;
+}
+
+a{
+  color:white;
+  text-decoration:none;
+}
+
+@media only screen and (min-width:768px){
+  body{
+    font-size:16px;
+  }
+
+
+}
+
+@media only screen and (min-width:480) and (max-width:768){
+  body{
+    font-size:15px;
+    
+  }
+
+}
+
+@media only screen and (max-width:479){
+  body{
+    font-size:14px;
+  }
+
+}
