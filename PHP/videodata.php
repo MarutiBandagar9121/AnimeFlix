@@ -2,11 +2,13 @@
 header("Access-Control-Allow-Origin: http://localhost:3000");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
-$host = "localhost";
-$port = "5432";
-$user = "postgres";
-$dbname = "ottwebapp";
-$password = "maruti9121";
+require __DIR__ . "/vendor/autoload.php";
+Dotenv\Dotenv::createUnsafeImmutable(__DIR__ . '/')->load();
+$host = $_ENV['DB_HOST'];
+$port = $_ENV['DB_PORT'];
+$user = $_ENV['DB_USER'];
+$dbname = $_ENV['DB_NAME'];
+$password = $_ENV['DB_PASSWORD'];
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $json_input = file_get_contents("php://input");
     $input = json_decode($json_input, true);

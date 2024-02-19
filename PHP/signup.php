@@ -1,9 +1,5 @@
 <?php
-// session_set_cookie_params([
-//     'secure' => false,  // For local development without HTTPS
-//     'domain' => null,   // Allow the session cookie on any subdomain
-// ]);
-// session_start();
+
 header("Access-Control-Allow-Origin: http://localhost:3000");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
@@ -13,21 +9,10 @@ require "vendor/phpmailer/phpmailer/src/Exception.php";
 require "vendor/phpmailer/phpmailer/src/SMTP.php";
 use PHPMailer\PHPMailer\PHPMailer;
 
-// use PHPMailer\PHPMailer\Exception;
-// use PHPMailer\PHPMailer\SMTP;
 
+require __DIR__ . "/vendor/autoload.php";
+Dotenv\Dotenv::createUnsafeImmutable(__DIR__ . '/')->load();
 
-
-
-
-// $data = array(
-//     'name' => 'John Doe',
-//     'age' => 25,
-//     'city' => 'Example City'
-// );
-// $jsonData = json_encode($data);
-// header('Content-Type: application/json');
-// echo $jsonData;
 $firstname;
 $lastname;
 $username;
@@ -49,81 +34,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $pass2 = $input['encrypass2'];
         $email = $input['email'];
         $salt = $input['salt'];
-
-        //session varibale
-        // $_SESSION['username'] = $username;
-        // $_SESSION['firstname'] = $firstname;
-        // $_SESSION['lastname'] = $lastname;
-        // $_SESSION['email'] = $email;
-        // $_SESSION['password'] = $pass;
-        // $_SESSION['salt'] = $salt;
-
-        // // Check if session variables are set
-        // if (isset($_SESSION['username'], $_SESSION['firstname'], $_SESSION['lastname'], $_SESSION['email'], $_SESSION['password'], $_SESSION['salt'])) {
-        //     $response = array("msg" => "Session variables are set and accessible.");
-        //     echo json_encode($response);
-        //     //echo "Session variables are set and accessible.";
-        // } else {
-        //     $response = array("msg" => "Some or all of the session variables are not set.");
-        //     echo json_encode($response);
-        //     //echo "Some or all of the session variables are not set.";
-        // }
-
-
-
         if (strlen($username) > 20) {
             $response = array("error" => "Username Length Exceeds.(Max 20 char)");
             echo json_encode($response);
             exit();
 
         }
-        // if(strlen($pass)<6){
-        //     $response=array("error"=>"Password Length Short.(Min 6 char)");
-        //     echo json_encode($response);
-        //     exit();
-
-        // }
-        // if(strlen($pass)>20){
-        //     $response=array("error"=>"Passwords Length Exceeds.(Max 20 char)");
-        //     echo json_encode($response);
-        //     exit();
-
-        // }
         $pass = trim($pass);
         $pass2 = trim($pass2);
         if (strcmp($pass, $pass2) != 0) {
 
             $response = array(
                 "error" => "Passwords Dont Match!"
-                // "pass1" => $pass,
-                // "pass2" => $pass2
-
             );
             echo json_encode($response);
             exit();
 
         }
-        // $output=array(
-        //     "name"=>$firstname,
-        //     'email'=>$email
 
-        // );
-        // $outputdata=json_encode($output);
-        // echo $outputdata;
+        $host = $_ENV['DB_HOST'];
+        $port = $_ENV['DB_PORT'];
+        $user = $_ENV['DB_USER'];
+        $dbname = $_ENV['DB_NAME'];
+        $password = $_ENV['DB_PASSWORD'];
 
-
-
-
-        $host = "localhost";
-        $port = "5432";
-        $user = "postgres";
-        $dbname = "ottwebapp";
-        $password = "maruti9121";
-
-        // $con=pg_connect("host=$host port=$port user=$user dbname=$dbname password=$password");
-        // if($con==false){
-        //     echo "connection failed";
-        // }
+        
 
         try {
 
@@ -155,11 +90,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $msg = $e->getMessage();
             var_dump($msg);
             $response = array(
-                "error" => "Connection failed",
+                "error" => "Connection failed!",
                 "message" => $msg
-                //.$e->getMessage()
-                // "pass1" => $pass,
-                // "pass2" => $pass2
 
             );
             echo json_encode($response);
@@ -181,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
-        $mail->CharSet='UTF-8';
+        $mail->CharSet = 'UTF-8';
 
         $mail->Username = "maruti.bandagar9121@gmail.com";
         $mail->Password = "tuxrxqgekvceptmb";
@@ -194,12 +126,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         try {
             $mail->send();
         } catch (Exception $e) {
-            $response = array('error' =>$mail->ErrorInfo);
+            $response = array('error' => $mail->ErrorInfo);
             echo json_encode($response);
             exit();
         }
 
-        
+
 
         try {
 
@@ -224,10 +156,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $response = array(
                 "error" => "Connection failed",
                 "message" => $msg
-                //.$e->getMessage()
-                // "pass1" => $pass,
-                // "pass2" => $pass2
-
             );
             echo json_encode($response);
             exit();
