@@ -1,6 +1,10 @@
 # AnimeFlix
 An OTT web Application for Anime.
 
-![HomePage](https://github.com/MarutiBandagar9121/AnimeFlix/assets/98071197/c89b14b8-1e12-4e07-913b-8244935cbf70)
-![AnimeList](https://github.com/MarutiBandagar9121/AnimeFlix/assets/98071197/8e7e0058-c250-4116-968e-09d1aa594e18)
-![Video](https://github.com/MarutiBandagar9121/AnimeFlix/assets/98071197/e0e268ef-989a-4587-843a-4c3e708dc71f)
+![AnimeFlix_Home](https://github.com/MarutiBandagar9121/AnimeFlix/assets/98071197/d365e17d-b06c-44f2-8c88-2fd7d860d38f)
+
+![AnimeFlix_Signup](https://github.com/MarutiBandagar9121/AnimeFlix/assets/98071197/49e9d2e0-d2f6-4238-9863-d1f1fc39c88a)
+
+![AnimeFlix_Login](https://github.com/MarutiBandagar9121/AnimeFlix/assets/98071197/49f00ac6-a514-4fbc-8617-4a07301c68d4)
+![AnimeFlix_animelist](https://github.com/MarutiBandagar9121/AnimeFlix/assets/98071197/7b8825e2-796d-4987-a92c-7e11e6fd54f8)
+![AnimeFlix_episodePage](https://github.com/MarutiBandagar9121/AnimeFlix/assets/98071197/872aa54a-17cc-43b3-8268-074cb40fc10f)
